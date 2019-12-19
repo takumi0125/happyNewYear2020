@@ -3,12 +3,6 @@ extends /assets/_layout/default
 
 //- meta設定
 block vars
-  //- 上書き
-  - title ="Marching Cubes Metaball"
-  - useTitleSeparater = false;
-  - keywords = '';
-  - description = 'WebGL Marching Cubes Metaball powered by three.js';
-
   //- その他変数
   - bodyClass = 'is-index';  //- bodyタグに付与するクラス
   - contentsId = 'index'
@@ -26,5 +20,19 @@ block script
 
 //- ここからコンテンツ部分を記述
 block contents
-  main.index_p-main.js-mainVisual
-    canvas(ref="canvas")
+  model-viewer(
+    src="./assets/3d/Astronaut.glb"
+    ios-src="./assets/3d/Astronaut.usdz"
+    alt=""
+    background-color="#f5a742"
+    shadow-intensity="0.8"
+    ar
+    ar-scale="auto"
+    camera-controls
+    magic-leap
+    unstable-webxr
+    quick-look-browsers="safari chrome"
+    style="width: 100%; height: 100%; position: fixed"
+  )
+
+  //- div.cover.js-cover

@@ -20,13 +20,15 @@ module.exports = (gulp, gulpPlugins, config, utils)->
 
     for task in config.optionsWatchTasks then task()
 
+    serverURL = 'http' + (config.https? 's': '') + '://127.0.0.1:50000' + config.serverDefaultPath
+
     return gulp.src config.publishDir
     .pipe gulpPlugins.webserver
       livereload:
         enable: true
         filter: (fileName)-> return !fileName.match(/.map$/)
       port: 50000
-      open: 'http://127.0.0.1:50000' + config.serverDefaultPath
+      open: serverURL
       directoryListing: false
       host: '0.0.0.0'
       https: config.https
@@ -34,4 +36,4 @@ module.exports = (gulp, gulpPlugins, config, utils)->
         connectSSI
           baseDir: config.publishDir
           ext: '.html'
-    .pipe gulpPlugins.notify "[watch]: start local server. http://127.0.0.1:50000#{config.serverDefaultPath}"
+    .pipe gulpPlugins.notify "[watch]: start local server. #{serverURL}"
