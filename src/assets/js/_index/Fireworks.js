@@ -20,9 +20,9 @@ export default class Fireworks {
     this.numParticlesInGroup = 16;
     this.lifeTime = 3;
 
-    this.initData();
-
     this.initGeometry();
+
+    this.initData();
     this.initMaterial();
 
     // points
@@ -85,23 +85,26 @@ export default class Fireworks {
     // velocity + timeOffset
     for(let i = 0; i < numGroups; i++) {
       let param = 1;
-      v = new THREE.Vector3(0.9 + Math.random() * 0.1, 0, 0);
-      v.applyAxisAngle(AXIS_Z, Math.random() * Math.PI * 2);
-      v.applyAxisAngle(AXIS_Y, Math.random() * Math.PI * 2);
-      v.applyAxisAngle(AXIS_X, Math.random() * Math.PI * 2);
+
 
       for(let j = 0; j < this.numParticlesInGroup; j++) {
         index1 = (i * this.numParticlesInGroup + j) * 4;
         index2 = index1 + this.numParticles * 4;
+
+        v = new THREE.Vector3(0.7 + Math.random() * 0.3, 0, 0);
+        v.applyAxisAngle(AXIS_Z, Math.random() * Math.PI * 2);
+        v.applyAxisAngle(AXIS_Y, Math.random() * Math.PI * 2);
+        v.applyAxisAngle(AXIS_X, Math.random() * Math.PI * 2);
 
         data[index1 + 0] = 0;
         data[index1 + 1] = 0;
         data[index1 + 2] = 0;
         data[index1 + 3] = -j;
 
-        data[index2 + 0] = v.x + (-0.5 + Math.random()) * 0.01;
-        data[index2 + 1] = v.y + (-0.5 + Math.random()) * 0.01;
-        data[index2 + 2] = v.z + (-0.5 + Math.random()) * 0.01;
+        v.multiplyScalar(0.96);
+        data[index2 + 0] = (v.x + (-0.5 + Math.random()) * 0.01) * this.pointSize * 0.02;
+        data[index2 + 1] = (v.y + (-0.5 + Math.random()) * 0.01) * this.pointSize * 0.02;
+        data[index2 + 2] = (v.z + (-0.5 + Math.random()) * 0.01) * this.pointSize * 0.02 ;
         data[index2 + 3] = param;
 
         param *= 0.98;
@@ -120,6 +123,7 @@ export default class Fireworks {
       fragmentShader: require('./_glsl/calculator.frag'),
       uniforms: {
         texture: { type: 't', value: initDataTexture },
+        dt: { type: 'f', value: 0 },
         resolution: { type: '2f', value: new THREE.Vector2(this.dataTextureSize, 2) }
       }
     });
@@ -139,12 +143,18 @@ export default class Fireworks {
   }
 
   update() {
+    const currentTime = new Date().getTime();
+    const dt = (currentTime - this.currentTime) / 1000;
+    this.currentTime = currentTime;
+
+    this.calculatorMaterial.uniforms.dt.value = dt;
     this.renderTexture.render();
     this.renderTexture.swapTexture();
     this.setDataTexture(this.renderTexture.getTexture());
   }
 
   burst() {
+    this.currentTime = new Date().getTime();
     new TimelineMax()
     .fromTo(this.material.uniforms.time, 20, { value: 0 }, { value: 20, ease: Linear.easeNone, onUpdate: ()=> {
       this.update();

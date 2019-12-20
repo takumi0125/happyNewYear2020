@@ -31,6 +31,10 @@ export default class SwappableRenderTexture {
     this.plane.material.needsUpdate = true;
   }
 
+  setUniformValue(key, value) {
+    this.updateMaterial.uniforms[key].value = value;
+  }
+
   swapTexture() {
     this.plane.material.uniforms.texture.value = this.getTexture();
     this.plane.material.needsUpdate = true;

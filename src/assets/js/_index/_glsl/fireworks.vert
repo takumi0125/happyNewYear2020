@@ -35,12 +35,14 @@ void main(void){
   float uvX = (vertexId + 0.5) / dataTextureSize;
   vec4 data1 = texture2D(dataTexture, vec2(uvX, 0.0));
   vec4 data2 = texture2D(dataTexture, vec2(uvX, 1.0));
-  vec3 pos = data1.xyz * pointSize * 0.01;
+
+  vec3 pos = data1.xyz;
   vec4 mvPos = modelViewMatrix * vec4(pos, 1.0);
 
   gl_PointSize = pointSize * (100.0 / -mvPos.z);
 
-  vAlpha = (1.0 - time / (lifeTime + randomValues.x * lifeTime)) * data2.w * data2.w * data2.w;
+  // vAlpha = (1.0 - time / (lifeTime + randomValues.x * lifeTime)) * data2.w * data2.w * data2.w;
+  vAlpha = 1.0;
   vColor = vec3(1.0, 0.0, 0.0);
 
   gl_Position = projectionMatrix * mvPos;
