@@ -106,14 +106,11 @@ html(prefix="og:http://ogp.me/ns#")
     block css
 
     //- head内で読み込みたいJS
-    //- script(src="./assets/js/head.js")
+    script(src="./assets/js/head.js")
     script(type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js")
-    script(nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js")
     block scriptHead
-
 
   body(class=bodyClass)
     block contents
 
-    //- script(src="./assets/js/lib.js")
     block script

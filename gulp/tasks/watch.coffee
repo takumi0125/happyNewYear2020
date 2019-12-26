@@ -20,7 +20,7 @@ module.exports = (gulp, gulpPlugins, config, utils)->
 
     for task in config.optionsWatchTasks then task()
 
-    serverURL = 'http' + (config.https? 's': '') + '://127.0.0.1:50000' + config.serverDefaultPath
+    serverURL = 'http' + (if config.https then 's' else '') + '://127.0.0.1:50000' + config.serverDefaultPath
 
     return gulp.src config.publishDir
     .pipe gulpPlugins.webserver

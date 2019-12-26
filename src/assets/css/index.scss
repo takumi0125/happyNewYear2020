@@ -15,7 +15,140 @@ model-viewer {
   position: fixed;
   width: 100%;
   height: 100%;
-  // background-color: #fff;
+  background-color: transparent;
   z-index: 10;
   pointer-events: none;
+}
+
+.attention {
+  display: none;
+  position: absolute;
+  right: 14vmin;
+  bottom: 14vmin;
+  pointer-events: none;
+  width: 40vmin;
+
+  &:before {
+    display: block;
+    width: 100%;
+    padding-top: 160.764 / 214.238 * 100%;
+    content: '';
+  }
+
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.notAR {
+  display: none;
+  position: absolute;
+  right: 4vmin;
+  bottom: 4vmin;
+  pointer-events: none;
+  width: 34vmin;
+
+  &:before {
+    display: block;
+    width: 100%;
+    padding-top: 383 / 457.4 * 100%;
+    content: '';
+  }
+
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.qrcode {
+  position: absolute;
+  width: 14vmin;
+  height: 14vmin;
+  right: 0;
+  bottom: 0;
+}
+
+.cover.is-AR .attention {
+  display: block;
+}
+
+.cover.is-notAR .notAR {
+  display: block;
+}
+
+.loading {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #f5a742;
+  z-index: 20;
+  pointer-events: none;
+  transition: opacity 0.2s linear 0.4s,
+              visibility 0.2s linear 0.4s;
+
+  &.is-loaded {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes loadingAnim {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg) }
+}
+
+.loadingRing,
+.loadingCircle {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 18vw;
+  max-width: 100px;
+  height: 18vw;
+  max-height: 100px;
+}
+
+.loadingRing {
+  fill: #F5D44C;
+  animation: loadingAnim 6s linear 0s infinite;
+}
+.loadingCircle {
+  fill: #e24d3d;
+  animation: loadingAnim 6s linear 0s reverse infinite;
+}
+.loadingLabel {
+  display: block;
+  position: absolute;
+  transform: translateY(160%);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 20vw;
+  max-width: 100 / 18 * 20;
+  height: 20 / 160 * 70vw;
+  max-height: 100 / 18 * 20 / 160 * 70px;
+  fill: #fff;
+}
+
+:root {
+  --progress-bar-color: #f5a742;
+  --progress-bar-height: 4px;
 }

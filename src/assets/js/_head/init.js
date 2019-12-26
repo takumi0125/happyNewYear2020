@@ -1,8 +1,6 @@
 // ------------------------------
 // unique Class for each case
 // ------------------------------
-import WebFont from 'webfontloader'
-
 const ENV = require('../_env');
 const g = window[ENV.projectName] = window[ENV.projectName] || {};
 
@@ -69,30 +67,3 @@ const paramsStr = location.search.replace('?', '').split('&').forEach((str)=> {
   [ key, value ] = str.split('=');
   g.params[key] = value;
 });
-
-// g.loadFontPromise = new Promise((resolve, reject)=> {
-//   console.log('loading fonts...');
-//   WebFont.load({
-//     google: {
-//       families: [ 'Montserrat:500,600,700' ]
-//     },
-
-//     timeout: 5000,
-
-//     fontactive: ()=> {
-//       console.log('fontactive', arguments);
-//     },
-
-//     active: ()=> {
-//       console.log('all fonts loaded');
-//       // this.store.commit('addLoadingCurrent');
-//       resolve();
-//     },
-
-//     inactive: ()=> {
-//       console.error('font inactive');
-//       // this.store.commit('addLoadingCurrent');
-//       resolve('load fonts error');
-//     }
-//   });
-// });
