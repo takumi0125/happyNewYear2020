@@ -15,11 +15,11 @@ g.md = checkDevice();
 
 if(g.md.tablet()) {
   g.isTablet = true;
-  const _WIDTH = 1200;
-  if(window.innerWidth < _WIDTH) {
-    const initilScale = window.innerWidth / _WIDTH;
-    document.querySelector('meta[name="viewport"]').setAttribute('content', `width=${_WIDTH},initial-scale=${initilScale}`);
-  }
+  // const _WIDTH = 1200;
+  // if(window.innerWidth < _WIDTH) {
+  //   const initilScale = window.innerWidth / _WIDTH;
+  //   document.querySelector('meta[name="viewport"]').setAttribute('content', `width=${_WIDTH},initial-scale=${initilScale}`);
+  // }
 } else if(g.md.mobile()) {
   g.isMobile = true;
 } else {
