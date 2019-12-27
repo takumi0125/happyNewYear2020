@@ -14,7 +14,7 @@ config =
     useTitleSeparater: true
     titleSeparater: ' | '
 
-    description: "I hope you all have a wonderful year!"
+    description: "I hope you all have a wonderful year! and I hope WebAR makes progress!"
     useDescriptionAsOgDescription: true # ogDescriptionをdescriptionと同じにするかどうか
     ogDescription: ""
 
