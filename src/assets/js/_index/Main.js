@@ -1,7 +1,7 @@
 const ENV = require('../_env');
 const g = window[ENV.projectName] = window[ENV.projectName] || {};
 
-const _3D_MODEL_DIR = './assets/3d/'
+const _3D_MODEL_DIR = 'assets/3d/'
 
 export default class Main {
   constructor() {
@@ -58,9 +58,6 @@ export default class Main {
   }
 
   async initARAndroid() {
-    // single animationのモデルを読み込み
-    this.modelViewer.src=`${_3D_MODEL_DIR}hagaki.glb`;
-
     await new Promise((resolve, reject)=> {
       this.modelViewer.addEventListener('load', async (e)=> {
         if(this.checkIfARAvailable()) {
