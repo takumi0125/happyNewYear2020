@@ -9,7 +9,7 @@ https://2020.unshift.jp/
 ```bash
 mkdir yourProject
 cd yourProject
-git clone git@github.com:takumi0125/threejsMarchingCubesMetaball .
+git clone git@github.com:takumi0125/happyNewYear2020 .
 npm i
 npm start
 ```
